@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OB App</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+text-align:center;
+}
+
+/* Logo */
+.logo{
+width:120px;
+margin:20px auto 10px;
+display:block;
+border-radius:25px;
+box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* Home */
+#home{ padding:20px; }
+
+.container{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+padding:20px;
+}
+
+.app-btn{
+background:white;
+color:black;
+padding:30px;
+border-radius:15px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.app-btn:hover{ transform:scale(1.05); }
+
+/* Calculator */
+#calculatorPage{
+display:none;
+background:linear-gradient(135deg,#1e3c72,#2a5298);
+min-height:100vh;
+padding-top:20px;
+}
+
+.calculator{
+width:340px;
+background:#111;
+border-radius:20px;
+padding:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.5);
+margin:auto;
+margin-top:20px;
+}
+
+.display{
+background:black;
+color:#00ff99;
+font-size:28px;
+padding:15px;
+border-radius:10px;
+text-align:right;
+margin-bottom:15px;
+overflow-x:auto;
+}
+
+.buttons{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+}
+
+button{
+padding:15px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.number{ background:#222; color:white; }
+.operator{ background:#ff9800; color:white; }
+.equal{ background:#00c853; color:white; grid-column:span 2; }
+.clear{ background:#f44336; color:white; }
+
+.back{
+margin-top:10px;
+background:#2196f3;
+color:white;
+padding:10px;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* Prank Page */
+#prankPage{
+display:none;
+background:black;
+color:#00ff00;
+min-height:100vh;
+padding:20px;
+font-family:monospace;
+}
+
+#progressContainer{
+width:80%;
+margin:20px auto;
+background:#222;
+border:1px solid #00ff00;
+height:25px;
+}
+
+#progressBar{
+height:100%;
+width:1%;
+background:#00ff00;
+}
+
+#percent{ margin-top:5px; }
+
+#code{
+padding:15px;
+height:40vh;
+overflow:hidden;
+white-space:pre-wrap;
+font-size:13px;
+}
+
+#hackTitle{
+color:red;
+font-size:28px;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%{opacity:1;}
+50%{opacity:0;}
+100%{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Home -->
+<div id="home">
+<img src="logo.png" class="logo">
+<h1>OB App</h1>
+
+<div class="container">
+<div class="app-btn" onclick="openCalculator()">ЁЯзо Smart Calculator</div>
+<div class="app-btn" onclick="openPrank()">ЁЯТ╗ Prank Hack</div>
+</div>
+</div>
+
+<!-- Calculator -->
+<div id="calculatorPage">
+<img src="logo.png" class="logo">
+<div class="calculator">
+<div class="display" id="display">0</div>
+
+<div class="buttons">
+<button class="clear" onclick="clearDisplay()">C</button>
+<button class="operator" onclick="addValue('%')">%</button>
+<button class="operator" onclick="addValue('/')">├╖</button>
+<button class="operator" onclick="addValue('*')">├Ч</button>
+
+<button class="number" onclick="addValue('7')">7</button>
+<button class="number" onclick="addValue('8')">8</button>
+<button class="number" onclick="addValue('9')">9</button>
+<button class="operator" onclick="addValue('-')">-</button>
+
+<button class="number" onclick="addValue('4')">4</button>
+<button class="number" onclick="addValue('5')">5</button>
+<button class="number" onclick="addValue('6')">6</button>
+<button class="operator" onclick="addValue('+')">+</button>
+
+<button class="number" onclick="addValue('1')">1</button>
+<button class="number" onclick="addValue('2')">2</button>
+<button class="number" onclick="addValue('3')">3</button>
+<button class="number" onclick="addValue('.')">.</button>
+
+<button class="number" onclick="addValue('0')">0</button>
+<button class="equal" onclick="calculate()">=</button>
+</div>
+
+<div class="back" onclick="goHome()">тмЕ Back</div>
+</div>
+</div>
+
+<!-- Prank Hack -->
+<div id="prankPage">
+
+<div id="hackTitle">тЪа YOUR DEVICE HACKED тЪа</div>
+<div>ржЖржкржирж╛рж░ ржлрзЛржирзЗрж░ ржбрзЗржЯрж╛ ржЕржирзНржп ржлрзЛржирзЗ ржЯрзНрж░рж╛ржирзНрж╕ржлрж╛рж░ рж╣ржЪрзНржЫрзЗ...</div>
+
+<div id="progressContainer">
+<div id="progressBar"></div>
+</div>
+<div id="percent">1%</div>
+
+<div id="code"></div>
+
+<div class="back" onclick="goHomeFromPrank()">тмЕ Back</div>
+
+</div>
+
+<script>
+let display=document.getElementById("display");
+
+/* Navigation */
+function openCalculator(){
+home.style.display="none";
+calculatorPage.style.display="block";
+}
+
+function openPrank(){
+home.style.display="none";
+prankPage.style.display="block";
+startPrank();
+}
+
+function goHome(){
+calculatorPage.style.display="none";
+home.style.display="block";
+}
+
+function goHomeFromPrank(){
+prankPage.style.display="none";
+home.style.display="block";
+}
+
+/* Calculator */
+function addValue(v){
+if(display.innerText==="0") display.innerText=v;
+else display.innerText+=v;
+}
+
+function clearDisplay(){ display.innerText="0"; }
+
+function calculate(){
+try{ display.innerText=eval(display.innerText); }
+catch{ display.innerText="Error"; }
+}
+
+/* Advanced Prank */
+function startPrank(){
+let code=document.getElementById("code");
+let bar=document.getElementById("progressBar");
+let percentText=document.getElementById("percent");
+
+code.innerHTML="";
+bar.style.width="1%";
+percentText.innerText="1%";
+
+let percent=1;
+
+function randomLine(){
+let chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}[]();<>/=+-_*#@$%";
+let line="";
+for(let i=0;i<60;i++){
+line+=chars.charAt(Math.floor(Math.random()*chars.length));
+}
+return line;
+}
+
+let codeInt=setInterval(()=>{
+code.innerHTML+=randomLine()+"\n";
+code.scrollTop=code.scrollHeight;
+},50);
+
+let progressInt=setInterval(()=>{
+percent++;
+bar.style.width=percent+"%";
+percentText.innerText=percent+"%";
+
+if(percent>=100){
+clearInterval(progressInt);
+clearInterval(codeInt);
+document.getElementById("prankPage").innerHTML=
+"<h1 style='margin-top:100px;color:white;'>тЪа ржЖржкржирж╛рж░ ржлрж╛ржЗрж▓ ржЯрзНрж░рж╛ржирзНрж╕ржлрж╛рж░ рж╣рзЯрзЗ ржЧрзЗржЫрзЗ тЪа</h1>"+
+"<div class='back' onclick='goHomeFromPrank()'>тмЕ Back</div>";
+}
+},150);
+}
+</script>
+
+</body>
+</html>
